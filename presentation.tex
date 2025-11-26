@@ -536,7 +536,7 @@ $$\delta \dot{q}_i = \frac{d(\delta q_i)}{dt} - \dot{q}_i \frac{d(\epsilon \tau)
 \begin{block}{推导}
 \begin{align*}
 \delta \dot{q}_i &= \frac{d}{dt}(\epsilon \xi_i + \dot{q}_i \epsilon \tau) - \dot{q}_i \frac{d(\epsilon \tau)}{dt} \\
-&= \epsilon \frac{d\xi_i}{dt} + \ddot{q}_i \epsilon \tau + \dot{q}_i \epsilon \frac{d\tau}{dt} - \dot{q}_i \epsilon \frac{d\tau}{dt} - \dot{q}_i \ddot{q}_i \epsilon \tau \\
+&= \epsilon \frac{d\xi_i}{dt} + \ddot{q}_i \epsilon \tau + \dot{q}_i \epsilon \frac{d\tau}{dt} - \dot{q}_i \epsilon \frac{d\tau}{dt} - \ddot{q}_i \epsilon \tau \\
 &= \epsilon \frac{d\xi_i}{dt}
 \end{align*}
 \end{block}
@@ -586,9 +586,11 @@ $$\frac{\partial L}{\partial q_i}\xi_i + \frac{\partial L}{\partial \dot{q}_i}\f
 
 \begin{block}{哈密顿量}
 注意到：
-$$\frac{\partial L}{\partial t} + \frac{dL}{dt} = \frac{\partial L}{\partial t} + \frac{\partial L}{\partial q_i}\dot{q}_i + \frac{\partial L}{\partial \dot{q}_i}\ddot{q}_i = \frac{\partial L}{\partial t} + \frac{d}{dt}\left(p_i\dot{q}_i\right)$$
+$$\frac{dL}{dt} = \frac{\partial L}{\partial q_i}\dot{q}_i + \frac{\partial L}{\partial \dot{q}_i}\ddot{q}_i + \frac{\partial L}{\partial t}$$
+使用欧拉-拉格朗日方程 $\frac{\partial L}{\partial q_i} = \frac{d}{dt}\left(\frac{\partial L}{\partial \dot{q}_i}\right) = \dot{p}_i$：
+$$\frac{dL}{dt} = \dot{p}_i\dot{q}_i + p_i\ddot{q}_i + \frac{\partial L}{\partial t} = \frac{d}{dt}(p_i\dot{q}_i) + \frac{\partial L}{\partial t}$$
 若 $\frac{\partial L}{\partial t} = 0$，则：
-$$\frac{dL}{dt} = \frac{d}{dt}(p_i\dot{q}_i) \Rightarrow \frac{dH}{dt} = -\frac{dL}{dt}$$
+$$\frac{dH}{dt} = \frac{d}{dt}(p_i\dot{q}_i - L) = -\frac{dL}{dt}$$
 \end{block}
 \end{frame}
 
