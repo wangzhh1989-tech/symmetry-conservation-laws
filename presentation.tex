@@ -117,7 +117,7 @@ $$\frac{dH}{dt} = 0$$
 \pause
 \item \textbf{第二层}：拉氏量至多相差全导数 \quad $L' = L + \frac{df}{dt}$
 \pause
-\item \textbf{第三层}：\textcolor{red}{作用量不变}（最根本） \quad $S' = S$
+\item \textbf{第三层}：\textcolor{red}{作用量的变分不变}（最根本） \quad $\delta S' = \delta S$
 \end{enumerate}
 \end{frame}
 
@@ -162,13 +162,13 @@ $$= S + [f(q(t_2), t_2) - f(q(t_1), t_1)]$$
 \begin{definition}[连续对称性]
 如果存在连续变换：
 $$t \to t' = t + \delta t, \quad q_i \to q'_i = q_i + \delta q_i$$
-使得作用量不变（或拉氏量至多相差全导数），则称系统具有该\textbf{连续对称性}。
+使得拉氏量至多相差全导数（即作用量至多相差边界项），则称系统具有该\textbf{连续对称性}。
 \end{definition}
 
 \pause
 
 \begin{alertblock}{注意}
-这里的"不变"是指变换后的作用量 $S'[q']$ 等于原作用量 $S[q]$。
+当端点固定时，边界项的变分为零，因此作用量的变分不变：$\delta S' = \delta S$。
 \end{alertblock}
 \end{frame}
 
@@ -550,26 +550,28 @@ $$\delta \dot{q}_i = \epsilon \left(\frac{\partial \xi_i}{\partial q_j}\dot{q}_j
 
 \begin{frame}
 \frametitle{A.4 对称性条件}
-\begin{block}{作用量的变化}
-对称性要求作用量在变换下至多相差一个全微分：
-$$\delta S = \int_{t_1}^{t_2} \delta L \, dt = \epsilon \int_{t_1}^{t_2} \frac{dF}{dt} \, dt$$
+\begin{block}{正确表述}
+\textbf{对称性}意味着拉格朗日量至多相差全导数：
+
+$$\delta L = L(q', \dot{q}', t') - L(q, \dot{q}, t) = \epsilon \frac{dF(q, t)}{dt}$$
+
 其中 $F(q, t)$ 是某个函数。
 \end{block}
 
 \pause
 
-\begin{block}{拉格朗日量的变化}
-$$\delta L = \frac{\partial L}{\partial q_i}\delta q_i + \frac{\partial L}{\partial \dot{q}_i}\delta \dot{q}_i + \frac{\partial L}{\partial t}\delta t$$
+\begin{alertblock}{重要说明}
+这意味着作用量至多相差边界项：
+$$\delta S = \epsilon[F(q(t_2), t_2) - F(q(t_1), t_1)]$$
 
-考虑到时间变换和坐标变换：
-$$\delta L + \frac{dL}{dt}\delta t = \epsilon \frac{dF}{dt}$$
-\end{block}
+由于变分时端点固定，边界项的变分为零，因此运动方程不变。
+\end{alertblock}
 
 \pause
 
-\begin{alertblock}{对称性条件}
+\begin{block}{对称性条件}
 $$\frac{\partial L}{\partial q_i}\xi_i + \frac{\partial L}{\partial \dot{q}_i}\frac{d\xi_i}{dt} + \left(\frac{\partial L}{\partial t} + \frac{dL}{dt}\right)\tau = \frac{dF}{dt}$$
-\end{alertblock}
+\end{block}
 \end{frame}
 
 \begin{frame}
@@ -620,25 +622,30 @@ $$\frac{dQ}{dt} = 0 \quad \Rightarrow \quad Q = \text{常数}$$
 
 \begin{frame}
 \frametitle{A.7 诺特定理的结论}
+\begin{block}{推导过程}
+由对称性条件 $\delta L = \epsilon \frac{dF}{dt}$，经过推导得到：
+
+$$\frac{d}{dt}\left[\sum_i p_i\xi_i - H\tau + F\right] = \frac{dF}{dt}$$
+
+因此：
+
+$$\boxed{\frac{d}{dt}\left[\sum_i p_i\xi_i - H\tau\right] = 0}$$
+\end{block}
+
+\pause
+
 \begin{theorem}[诺特定理]
-若系统在无穷小变换
-$$t \to t + \epsilon\tau(q,t), \quad q_i \to q_i + \epsilon\xi_i(q,t)$$
-下具有对称性（作用量不变或至多相差全微分），则存在守恒量：
-$$\boxed{Q = \sum_{i=1}^n p_i \xi_i - H\tau - F}$$
+\textbf{守恒量（诺特荷）：}
+$$\boxed{Q = \sum_i p_i\xi_i - H\tau}$$
+
 其中：
 \begin{itemize}
 \item $p_i = \frac{\partial L}{\partial \dot{q}_i}$ 是广义动量
 \item $H = \sum_i p_i\dot{q}_i - L$ 是哈密顿量
-\item $F$ 来自 $\delta L = \frac{dF}{dt}$
 \end{itemize}
+
+\textbf{注：}$F$ 项不影响守恒性
 \end{theorem}
-
-\pause
-
-\begin{block}{简化情形}
-若 $F = 0$（拉格朗日量严格不变），则：
-$$Q = \sum_{i=1}^n p_i \xi_i - H\tau$$
-\end{block}
 \end{frame}
 
 \begin{frame}
@@ -807,24 +814,44 @@ $$\delta(d^4x \, \mathcal{L}) = d^4x \left[\delta\mathcal{L} + \partial_\mu(\mat
 
 \begin{frame}
 \frametitle{B.5 对称性条件}
-\begin{block}{对称性要求}
-若系统具有对称性，则作用量不变：
-$$\delta S = 0$$
-或至多相差边界项。
-\end{block}
+\textbf{对称性}意味着拉格朗日密度至多相差四维散度：
 
-\pause
+$$\boxed{\delta\mathcal{L} = \epsilon\partial_\mu K^\mu}$$
 
-\begin{block}{局域条件}
-这要求被积函数为全微分：
-$$\delta\mathcal{L} + \partial_\mu(\mathcal{L}\epsilon^a\xi^\mu_a) = \epsilon^a\partial_\mu K^\mu_a$$
-其中 $K^\mu_a$ 是某个四矢量。
-\end{block}
+其中 $K^\mu$ 是某个四维矢量。
+
+\vspace{0.5em}
+
+\textbf{说明}：积分后作用量相差边界项
+$$\delta S = \epsilon\int_{\partial V} K^\mu dS_\mu$$
+在场于无穷远处衰减时，此项为零。
 
 \pause
 
 \begin{alertblock}{关键等式}
 $$\partial_\mu\left[\frac{\partial\mathcal{L}}{\partial(\partial_\mu\phi^b)}\delta\phi^b + \mathcal{L}\epsilon^a\xi^\mu_a - \epsilon^a K^\mu_a\right] = 0$$
+\end{alertblock}
+\end{frame}
+
+\begin{frame}
+\frametitle{B.5补充：为何全导数/散度可以忽略}
+
+\textbf{一维情况（点粒子）：}
+$$L' = L + \frac{dF}{dt} \quad \Rightarrow \quad S' = S + [F(t_2) - F(t_1)]$$
+
+端点固定 $\Rightarrow$ 边界项对 $\delta S = 0$ 无影响
+
+\vspace{1em}
+
+\textbf{四维情况（场论）：}
+$$\mathcal{L}' = \mathcal{L} + \partial_\mu K^\mu \quad \Rightarrow \quad S' = S + \int_{\partial V} K^\mu dS_\mu$$
+
+场在无穷远衰减 $\Rightarrow$ 边界项为零
+
+\vspace{1em}
+
+\begin{alertblock}{核心思想}
+运动方程只依赖于作用量的\textbf{变分}，边界项在变分时消失！
 \end{alertblock}
 \end{frame}
 
